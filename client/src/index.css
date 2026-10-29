@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-system, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --color-ink-950: #070b16;
+  --color-ink-900: #0b1120;
+  --color-ink-800: #111827;
+  --color-guard-300: #c4b5fd;
+  --color-guard-400: #a78bfa;
+  --color-guard-500: #8b5cf6;
+  --color-guard-600: #7c3aed;
+  --color-spark-300: #7dd3fc;
+  --color-spark-400: #38bdf8;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-ink-950);
+  color: #e2e8f0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Glass panel: translucent surface + fine border over the deep navy base. */
+.glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(10px);
+}
+
+/* Visible keyboard focus everywhere (WCAG 2.2 AA: focus visible). */
+:focus-visible {
+  outline: 2px solid var(--color-guard-400);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Thin scrollbars for feed panels. */
+.nice-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.nice-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+}
+.nice-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Live dot pulse — motion only, never the sole carrier of meaning. */
+@keyframes sg-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.live-dot {
+  animation: sg-pulse 1.6s ease-in-out infinite;
+}
+
+/* Reduced motion: kill animation and transitions throughout (WCAG 2.2 AA,
+ * PDF rule 12). Recharts animations are additionally gated in code via
+ * useReducedMotion so charts render statically. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
