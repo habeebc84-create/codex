@@ -1,5 +1,7 @@
 # StreamGuardian AI
 
+![CI](https://github.com/habeebc84-create/codex/actions/workflows/ci.yml/badge.svg)
+
 > **Safer Streams. Stronger Communities.**
 
 StreamGuardian AI is an AI co-pilot for Twitch streamers and moderators. It listens to live chat, understands what is happening, flags spam and harmful behaviour for **human** review, surfaces the questions a community actually asks, and summarises the stream — without ever taking a moderation action on its own.
@@ -132,7 +134,7 @@ This MVP has **not been deployed anywhere**. To deploy it honestly:
 
 1. Provision a Node >= 22 host (VPS, Fly.io, Render, or similar). Do not commit `.env`.
 2. Set `NODE_ENV=production`, a long random `SESSION_SECRET`, `CLIENT_URL` to the public client URL, and `DATABASE_PATH` to persistent storage.
-3. `npm install --omit=dev && npm run build`, then run `npm start` behind a reverse proxy with HTTPS, serving `client/dist/` as the static site.
+3. `npm install && npm run build` (the root `prepare` script installs the server and client dependencies too), then run `npm start` behind a reverse proxy with HTTPS, serving `client/dist/` as the static site.
 4. Replace the demo-only moderator session with a real identity provider before any public use — the current cookie session is **not** production authentication.
 5. For real Twitch chat, configure the Twitch app with the production redirect URI.
 
